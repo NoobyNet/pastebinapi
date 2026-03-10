@@ -1,0 +1,15 @@
+[project]
+name = "pastebinapi"
+version = "0.1.0"
+description = "FastAPI-based wrapper for the Pastebin API"
+requires-python = ">=3.14"
+dependencies = [
+    "aiohttp>=3.13.3",
+    "fastapi[standard]>=0.135.1",
+    "pydantic-settings>=2.13.1",
+    "pytest>=9.0.2",
+    "pytest-asyncio>=0.24.0",
+    "pytest-cov>=6.0.0",
+    "httpx>=0.28.1",
+    "xmltodict>=1.0.4",
+]

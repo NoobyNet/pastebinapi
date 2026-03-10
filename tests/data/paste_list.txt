@@ -1,0 +1,36 @@
+<paste>
+    <paste_key>zVNbShMS</paste_key>
+    <paste_date>1642531690</paste_date>
+    <paste_title>Kotlin Inline functions</paste_title>
+    <paste_size>2452</paste_size>
+    <paste_expire_date>0</paste_expire_date>
+    <paste_private>0</paste_private>
+    <paste_format_long>Kotlin</paste_format_long>
+    <paste_format_short>kotlin</paste_format_short>
+    <paste_url>https://pastebin.com/zVNbShMS</paste_url>
+    <paste_hits>51</paste_hits>
+</paste>
+<paste>
+    <paste_key>eg260f8t</paste_key>
+    <paste_date>1759960043</paste_date>
+    <paste_title></paste_title>
+    <paste_size>4396</paste_size>
+    <paste_expire_date>0</paste_expire_date>
+    <paste_private>2</paste_private>
+    <paste_format_long>YAML</paste_format_long>
+    <paste_format_short>yaml</paste_format_short>
+    <paste_url>https://pastebin.com/eg260f8t</paste_url>
+    <paste_hits>2</paste_hits>
+</paste>
+<paste>
+    <paste_key>JzKPJEwN</paste_key>
+    <paste_date>1772717634</paste_date>
+    <paste_title>Transforms</paste_title>
+    <paste_size>2058</paste_size>
+    <paste_expire_date>0</paste_expire_date>
+    <paste_private>0</paste_private>
+    <paste_format_long>TypeScript</paste_format_long>
+    <paste_format_short>typescript</paste_format_short>
+    <paste_url>https://pastebin.com/JzKPJEwN</paste_url>
+    <paste_hits>18</paste_hits>
+</paste>

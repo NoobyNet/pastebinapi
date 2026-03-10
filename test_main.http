@@ -1,0 +1,134 @@
+# Pastebin API Wrapper - HTTP Client Tests
+#
+# Configuration:
+# 1. Copy http-client.env.json and update with your credentials
+# 2. Use the "dev" environment when running these requests
+#
+# Note: api_dev_key is managed server-side via environment variables
+
+### Health Check (if implemented)
+GET {{baseUrl}}/
+Accept: application/json
+
+###
+
+### Login - Authenticate with Pastebin
+# Returns a user session key (api_user_key) for subsequent requests
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "api_user_name": "{{username}}",
+  "api_user_password": "{{password}}"
+}
+
+> {%
+    client.test("Login successful", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+        client.assert(response.body.data.api_user_key, "api_user_key not found");
+    });
+
+    // Store the user key for subsequent requests
+    client.global.set("userKey", response.body.data.api_user_key);
+%}
+
+###
+
+### List User Pastes
+# Lists all pastes for the authenticated user
+POST {{baseUrl}}/paste/list
+Content-Type: application/json
+
+{
+  "api_user_key": "{{userKey}}",
+  "api_results_limit": 50
+}
+
+> {%
+    client.test("List pastes successful", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+        client.assert(response.body.data.pastes, "Pastes array not found");
+    });
+%}
+
+###
+
+### Create Paste - Minimal (Public, No Expiration)
+# Creates a simple public paste
+POST {{baseUrl}}/paste/create
+Content-Type: application/json
+
+{
+  "api_paste_code": "print('Hello, World!')"
+}
+
+> {%
+    client.test("Create paste successful", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+        client.assert(response.body.data.paste_url, "paste_url not found");
+    });
+%}
+
+###
+
+### Create Paste - With All Options
+# Creates a paste with syntax highlighting, title, expiration, and privacy
+POST {{baseUrl}}/paste/create
+Content-Type: application/json
+
+{
+  "api_paste_code": "from fastapi import APIRouter\n\nrouter = APIRouter(prefix=\"/paste\", tags=[\"paste\"])\n\n@router.post(\"/create\")\nasync def create_new_paste(req):\n    \"\"\"Create a new paste on Pastebin.\"\"\"\n    return {\"status\": \"success\"}",
+  "api_paste_name": "FastAPI Router Example",
+  "api_paste_format": "python",
+  "api_paste_private": 1,
+  "api_paste_expire_date": "10M",
+  "api_user_key": "{{userKey}}"
+}
+
+> {%
+    client.test("Create paste with options successful", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+        client.assert(response.body.data.paste_url, "paste_url not found");
+    });
+%}
+
+###
+
+### Create Paste - Different Languages
+
+# JavaScript Example
+POST {{baseUrl}}/paste/create
+Content-Type: application/json
+
+{
+  "api_paste_code": "console.log('Hello, World!');",
+  "api_paste_name": "JavaScript Example",
+  "api_paste_format": "javascript"
+}
+
+###
+
+# Go Example
+POST {{baseUrl}}/paste/create
+Content-Type: application/json
+
+{
+  "api_paste_code": "package main\n\nimport \"fmt\"\n\nfunc main() {\n    fmt.Println(\"Hello, World!\")\n}",
+  "api_paste_name": "Go Example",
+  "api_paste_format": "go"
+}
+
+###
+
+# Rust Example
+POST {{baseUrl}}/paste/create
+Content-Type: application/json
+
+{
+  "api_paste_code": "fn main() {\n    println!(\"Hello, World!\");\n}",
+  "api_paste_name": "Rust Example",
+  "api_paste_format": "rust"
+}
+
+###
+
