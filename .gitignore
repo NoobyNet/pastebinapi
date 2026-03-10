@@ -79,5 +79,8 @@ logs/
 # Jetbrains
 .idea/
 
+# AI Agents
+.claude/
+
 # UV lock file (optional - uncomment if you want to ignore it)
 # uv.lock
