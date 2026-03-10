@@ -1,5 +1,7 @@
 from datetime import datetime
 from pydantic import BaseModel, Field
+from models.paste.paste_privacy import PastePrivacy
+
 
 class PasteItem(BaseModel):
     """Model representing a Pastebin paste."""
@@ -8,7 +10,7 @@ class PasteItem(BaseModel):
     title: str | None = Field(default=None, description="Paste title")
     size: int = Field(..., description="Paste size in bytes")
     expire_date: int = Field(..., description="Paste expiration date")
-    private: int = Field(..., description="Paste privacy status (0=public, 1=unlisted, 2=private)")
+    private: PastePrivacy = Field(..., description="Paste privacy level")
     format_long: str = Field(..., description="Paste syntax highlighting format")
     format_short: str = Field(..., description="Paste syntax highlighting format (short)")
     url: str = Field(..., description="Paste URL")

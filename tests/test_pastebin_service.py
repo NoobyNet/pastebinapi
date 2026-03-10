@@ -9,6 +9,8 @@ from models.login.login_request import LoginRequest
 from models.paste.list_paste_request import ListPasteRequest
 from models.paste.create_paste_request import CreatePasteRequest
 from models.paste.paste_format import PasteFormat
+from models.paste.paste_privacy import PastePrivacy
+from models.paste.paste_expiration import PasteExpiration
 from exceptions import (
     AuthenticationError,
     PasteListError,
@@ -249,22 +251,22 @@ class TestCreatePaste:
             api_paste_code="print('Hello')",
             api_paste_name="Full Options Paste",
             api_paste_format=PasteFormat.PYTHON,
-            api_paste_private=1,
-            api_paste_expire_date="10M",
+            api_paste_private=PastePrivacy.UNLISTED,
+            api_paste_expire_date=PasteExpiration.TEN_MINUTES,
             api_user_key="user_key_123"
         )
-        
+
         mock_response = AsyncMock()
         mock_response.status = 200
         mock_response.text = AsyncMock(return_value="https://pastebin.com/xyz789")
-        
+
         with patch("aiohttp.ClientSession.post") as mock_post:
             mock_post.return_value.__aenter__.return_value = mock_response
-            
+
             result = await pastebin_service.create_paste(create_req)
-            
+
             assert result == "https://pastebin.com/xyz789"
-            
+
             # Verify form data includes all optional fields
             call_args = mock_post.call_args
             form_data = call_args[1]["data"]

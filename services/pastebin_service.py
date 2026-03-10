@@ -71,9 +71,9 @@ class PastebinService:
         if req.api_paste_format:
             form_data["api_paste_format"] = req.api_paste_format.value
         if req.api_paste_private is not None:
-            form_data["api_paste_private"] = req.api_paste_private
+            form_data["api_paste_private"] = req.api_paste_private.value
         if req.api_paste_expire_date:
-            form_data["api_paste_expire_date"] = req.api_paste_expire_date
+            form_data["api_paste_expire_date"] = req.api_paste_expire_date.value
         if req.api_user_key:
             form_data["api_user_key"] = req.api_user_key
 

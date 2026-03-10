@@ -1,6 +1,7 @@
 from functools import lru_cache
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
+
 class Settings(BaseSettings):
     PASTEBIN_BASE_URL: str
     DEV_API_KEY: str
@@ -12,6 +13,7 @@ class Settings(BaseSettings):
         env_file_encoding="utf-8"
     )
 
+
 @lru_cache
 def get_settings() -> Settings:
     """
@@ -20,6 +22,7 @@ def get_settings() -> Settings:
     Can be used as a FastAPI dependency.
     """
     return Settings()
+
 
 # Singleton instance for backward compatibility
 settings = get_settings()
